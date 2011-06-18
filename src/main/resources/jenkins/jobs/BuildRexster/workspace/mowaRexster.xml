@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rexster>
+    <rexster-server-port>8182</rexster-server-port>
+    <doghouse-server-port>8183</doghouse-server-port>
+    <rexster-shutdown-port>8184</rexster-shutdown-port>
+    <rexster-shutdown-host>127.0.0.1</rexster-shutdown-host>
+    <base-uri>http://localhost</base-uri>
+    <web-root>public</web-root>
+    <character-set>UTF-8</character-set>
+    <web-server-configuration>
+        <com.sun.jersey.config.property.packages>com.tinkerpop.rexster</com.sun.jersey.config.property.packages>
+        <com.sun.jersey.spi.container.ContainerResponseFilters>com.tinkerpop.rexster.HeaderResponseFilter
+        </com.sun.jersey.spi.container.ContainerResponseFilters>
+    </web-server-configuration>
+    <graphs>
+        <graph>
+            <graph-name>emptygraph</graph-name>
+            <graph-type>tinkergraph</graph-type>
+        </graph>
+		<graph>
+            <graph-enabled>true</graph-enabled>
+            <graph-name>tinkergraph</graph-name>
+            <graph-type>tinkergraph</graph-type>
+            <graph-file>data/graph-example-1.xml</graph-file>
+            <extensions>
+                <allows>
+                    <allow>tp:gremlin</allow>
+					<allow>tp-sample:*</allow>
+                </allows>
+				<extension>
+				  <namespace>tp-sample</namespace>
+				  <name>map-config</name>
+				  <configuration>
+					<some-key>some-value</some-key>
+					<other-key>other-value</other-key>
+				  </configuration>
+				</extension>
+			</extensions>
+        </graph>
+    </graphs>
+</rexster>
