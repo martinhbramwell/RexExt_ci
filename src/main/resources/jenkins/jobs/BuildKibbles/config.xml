@@ -2,6 +2,12 @@
 <project>
   <actions/>
   <description>This will rebuild Rexster Kibbles whenever changes are published by the Tinkerpop development team</description>
+  <logRotator>
+    <daysToKeep>-1</daysToKeep>
+    <numToKeep>5</numToKeep>
+    <artifactDaysToKeep>-1</artifactDaysToKeep>
+    <artifactNumToKeep>-1</artifactNumToKeep>
+  </logRotator>
   <keepDependencies>false</keepDependencies>
   <properties>
     <com.coravy.hudson.plugins.github.GithubProjectProperty>
@@ -66,7 +72,7 @@
       <usePrivateRepository>false</usePrivateRepository>
     </hudson.tasks.Maven>
     <hudson.tasks.Shell>
-      <command>cp ./sample-kibbles/target/sample-kibbles-0.4.jar ${REXSTER_HOME}/target/rexster-0.4-standalone/ext</command>
+      <command>cp ./sample-kibbles/target/sample-kibbles-0.5-SNAPSHOT.jar ${REXSTER_HOME}/target/rexster-0.5-SNAPSHOT-standalone/ext</command>
     </hudson.tasks.Shell>
     <hudson.tasks.Shell>
       <command>${KILL_REXSTER_JOB_WORKSPACE}/WaitForRexsterToDie.sh</command>

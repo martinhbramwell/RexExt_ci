@@ -1,11 +1,17 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <project>
   <actions/>
-  <description>This will rebuild Rexster whenever changes are published by the development team</description>
+  <description>This will rebuild the Fitesse  whenever changes are published by the Tinkerpop development team</description>
+  <logRotator>
+    <daysToKeep>-1</daysToKeep>
+    <numToKeep>5</numToKeep>
+    <artifactDaysToKeep>-1</artifactDaysToKeep>
+    <artifactNumToKeep>-1</artifactNumToKeep>
+  </logRotator>
   <keepDependencies>false</keepDependencies>
   <properties>
     <com.coravy.hudson.plugins.github.GithubProjectProperty>
-      <projectUrl>https://github.com/tinkerpop/rexster.git/</projectUrl>
+      <projectUrl>https://github.com/smartrics/RestFixture/</projectUrl>
     </com.coravy.hudson.plugins.github.GithubProjectProperty>
   </properties>
   <scm class="hudson.plugins.git.GitSCM">
@@ -14,12 +20,12 @@
       <hudson.plugins.git.UserRemoteConfig>
         <name>origin</name>
         <refspec>+refs/heads/*:refs/remotes/origin/*</refspec>
-        <url>git://github.com/tinkerpop/rexster.git</url>
+        <url>git://github.com/smartrics/RestFixture.git</url>
       </hudson.plugins.git.UserRemoteConfig>
     </userRemoteConfigs>
     <branches>
       <hudson.plugins.git.BranchSpec>
-        <name>**</name>
+        <name>*/master</name>
       </hudson.plugins.git.BranchSpec>
     </branches>
     <recursiveSubmodules>false</recursiveSubmodules>
@@ -30,6 +36,9 @@
     <pruneBranches>false</pruneBranches>
     <buildChooser class="hudson.plugins.git.util.DefaultBuildChooser"/>
     <gitTool>Default</gitTool>
+    <browser class="hudson.plugins.git.browser.GithubWeb">
+      <url>https://github.com/smartrics/RestFixture/</url>
+    </browser>
     <submoduleCfg class="list"/>
     <relativeTargetDir></relativeTargetDir>
     <excludedRegions></excludedRegions>
@@ -47,41 +56,17 @@
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
   <triggers class="vector">
     <hudson.triggers.SCMTrigger>
-      <spec>01 06 * * * 
-01 14 * * * </spec>
+      <spec>25 06  * * * 
+25 14  * * * </spec>
     </hudson.triggers.SCMTrigger>
   </triggers>
   <concurrentBuild>false</concurrentBuild>
   <builders>
-    <hudson.tasks.Shell>
-      <command>chmod +x ./rexster-stop.sh
-( ${WORKSPACE}/rexster-stop.sh )&amp;
-
-${KILL_REXSTER_JOB_WORKSPACE}/WaitForRexsterToDie.sh
-</command>
-    </hudson.tasks.Shell>
-    <hudson.tasks.Maven>
-      <targets>-o clean
-install
--DskipTests</targets>
-      <mavenName>(Default)</mavenName>
-      <usePrivateRepository>false</usePrivateRepository>
-    </hudson.tasks.Maven>
-    <hudson.tasks.Shell>
-      <command>cd ${WORKSPACE}
-chmod +x ./rexster-start.sh
-</command>
-    </hudson.tasks.Shell>
+    <hudson.tasks.Ant>
+      <targets>clean  test  package  fitnesse-test dist</targets>
+      <antName>(Default)</antName>
+    </hudson.tasks.Ant>
   </builders>
-  <publishers>
-    <hudson.tasks.BuildTrigger>
-      <childProjects>BuildKibbles</childProjects>
-      <threshold>
-        <name>SUCCESS</name>
-        <ordinal>0</ordinal>
-        <color>BLUE</color>
-      </threshold>
-    </hudson.tasks.BuildTrigger>
-  </publishers>
+  <publishers/>
   <buildWrappers/>
 </project>

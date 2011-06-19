@@ -1,11 +1,11 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <project>
   <actions/>
-  <description>This will start the Rexster server as a *NIX Daemon.&lt;br/&gt;&#xd;
-However, before starting it collects our customixed  run-time configuration files.&lt;br/&gt;&lt;br/&gt;&#xd;
+  <description>This will start the Fitnesse server as a *NIX Daemon.&lt;br/&gt;&#xd;
+&lt;br/&gt;&#xd;
 &#xd;
 Check with :&lt;br/&gt;&#xd;
-ps aux | grep rexster | grep -v grep | awk &apos;{print $2}&apos;&#xd;
+ps aux | grep fitnesse | grep -v grep | awk &apos;{print $2}&apos;&#xd;
 </description>
   <logRotator>
     <daysToKeep>-1</daysToKeep>
@@ -24,12 +24,7 @@ ps aux | grep rexster | grep -v grep | awk &apos;{print $2}&apos;&#xd;
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
   <triggers class="vector"/>
   <concurrentBuild>false</concurrentBuild>
-  <builders>
-    <hudson.tasks.Shell>
-      <command>cp ${CONFIG_FILES_SCM_WORKSPACE}/src/main/resources/jenkins/jobs/BuildRexster/workspace/mowaRexster.xml .
-cp ${SAMPLE_KIBBLES_TARGETSPACE}/sample-kibbles-0.5-SNAPSHOT.jar ${REXSTER_HOME}/target/rexster-0.5-SNAPSHOT-standalone/ext</command>
-    </hudson.tasks.Shell>
-  </builders>
+  <builders/>
   <publishers>
     <hudson.plugins.postbuildtask.PostbuildTask>
       <tasks>
@@ -42,7 +37,7 @@ cp ${SAMPLE_KIBBLES_TARGETSPACE}/sample-kibbles-0.5-SNAPSHOT.jar ${REXSTER_HOME}
           </logTexts>
           <EscalateStatus>false</EscalateStatus>
           <RunIfJobSuccessful>false</RunIfJobSuccessful>
-          <script>echo ${WORKSPACE}/rexster-start.sh  -configuration mowaRexster.xml | at NOW</script>
+          <script>echo /etc/fitnesse/startup.sh | at NOW</script>
         </hudson.plugins.postbuildtask.TaskProperties>
       </tasks>
     </hudson.plugins.postbuildtask.PostbuildTask>
