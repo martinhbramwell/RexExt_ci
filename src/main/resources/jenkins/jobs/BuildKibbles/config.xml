@@ -65,6 +65,10 @@
 ( ./rexster-stop.sh  )&amp;
 </command>
     </hudson.tasks.Shell>
+    <hudson.tasks.Shell>
+      <command>grep -lre &apos;work-came-from&apos; ${WORKSPACE} | awk &apos;/.java/&apos; | xargs -d&apos;\n&apos; sed -i &apos;s/work-came-from/workCameFrom/g&apos;
+</command>
+    </hudson.tasks.Shell>
     <hudson.tasks.Maven>
       <targets>-o install</targets>
       <mavenName>(Default)</mavenName>

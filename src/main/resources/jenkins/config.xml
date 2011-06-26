@@ -1,6 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <hudson>
-  <version>1.415</version>
+  <disabledAdministrativeMonitors/>
+  <version>1.416</version>
   <numExecutors>2</numExecutors>
   <mode>NORMAL</mode>
   <authorizationStrategy class="hudson.security.AuthorizationStrategy$Unsecured"/>
@@ -35,6 +36,43 @@
       <filterQueue>false</filterQueue>
       <properties class="hudson.model.View$PropertyList"/>
     </hudson.model.AllView>
+    <hudson.plugins.sectioned__view.SectionedView>
+      <owner class="hudson" reference="../../.."/>
+      <name>ServerRebuilds</name>
+      <description>This section shows all the stuff related keep servers (Fitnesse, Rexster) up to date.</description>
+      <filterExecutors>false</filterExecutors>
+      <filterQueue>false</filterQueue>
+      <properties class="hudson.model.View$PropertyList"/>
+      <sections>
+        <hudson.plugins.sectioned__view.ViewListingSection>
+          <jobNames class="tree-set">
+            <comparator class="hudson.util.CaseInsensitiveComparator"/>
+          </jobNames>
+          <jobFilters/>
+          <name></name>
+          <width>FULL</width>
+          <alignment>CENTER</alignment>
+          <views>
+            <string>All</string>
+            <string>ServerRebuilds</string>
+          </views>
+          <columns>1</columns>
+        </hudson.plugins.sectioned__view.ViewListingSection>
+        <hudson.plugins.sectioned__view.JobGraphsSection>
+          <jobNames class="tree-set">
+            <comparator class="hudson.util.CaseInsensitiveComparator" reference="../../../hudson.plugins.sectioned__view.ViewListingSection/jobNames/comparator"/>
+            <string>BuildRESTFixture</string>
+            <string>BuildRexster</string>
+            <string>StartFitnesse</string>
+            <string>StartRexster</string>
+          </jobNames>
+          <jobFilters/>
+          <name>How the jobs did</name>
+          <width>FULL</width>
+          <alignment>CENTER</alignment>
+        </hudson.plugins.sectioned__view.JobGraphsSection>
+      </sections>
+    </hudson.plugins.sectioned__view.SectionedView>
   </views>
   <primaryView>All</primaryView>
   <slaveAgentPort>0</slaveAgentPort>
@@ -48,14 +86,19 @@
           <default>
             <comparator class="hudson.util.CaseInsensitiveComparator"/>
           </default>
-          <int>2</int>
+          <int>5</int>
+          <string>CONFIG_FILES_SCM_WORKSPACE</string>
+          <string>../../ConfigFilesSCM/workspace</string>
+          <string>FITNESSE_ROOT</string>
+          <string>/etc/fitnesse/FitNesseRoot</string>
           <string>KILL_REXSTER_JOB_WORKSPACE</string>
           <string>../../KillRexster/workspace</string>
           <string>REXSTER_HOME</string>
-          <string>/var/lib/jenkins/jobs/BuildRexster/workspace/</string>
+          <string>../../BuildRexster/workspace/</string>
+          <string>SAMPLE_KIBBLES_TARGETSPACE</string>
+          <string>../../BuildKibbles/workspace/sample-kibbles/target/</string>
         </tree-map>
       </envVars>
     </hudson.slaves.EnvironmentVariablesNodeProperty>
   </globalNodeProperties>
-  <disabledAdministrativeMonitors/>
 </hudson>
