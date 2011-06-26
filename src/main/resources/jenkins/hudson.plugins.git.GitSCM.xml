@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <hudson.plugins.git.GitSCM_-DescriptorImpl>
-  <generation>28</generation>
+  <generation>30</generation>
   <globalConfigName></globalConfigName>
   <globalConfigEmail></globalConfigEmail>
 </hudson.plugins.git.GitSCM_-DescriptorImpl>
