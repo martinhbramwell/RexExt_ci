@@ -1,0 +1,107 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<project>
+  <actions/>
+  <description>This package keeps track of all the stuff used to configure the Fitnesse wiki for acceptance testing of Tinkerpop.</description>
+  <logRotator>
+    <daysToKeep>-1</daysToKeep>
+    <numToKeep>5</numToKeep>
+    <artifactDaysToKeep>-1</artifactDaysToKeep>
+    <artifactNumToKeep>-1</artifactNumToKeep>
+  </logRotator>
+  <keepDependencies>false</keepDependencies>
+  <properties>
+    <com.coravy.hudson.plugins.github.GithubProjectProperty>
+      <projectUrl>https://github.com/martinhbramwell/Tinkerpop_Fitnesse/</projectUrl>
+    </com.coravy.hudson.plugins.github.GithubProjectProperty>
+  </properties>
+  <scm class="hudson.plugins.git.GitSCM">
+    <configVersion>2</configVersion>
+    <userRemoteConfigs>
+      <hudson.plugins.git.UserRemoteConfig>
+        <name>origin</name>
+        <refspec>+refs/heads/*:refs/remotes/origin/*</refspec>
+        <url>git://github.com/martinhbramwell/Tinkerpop_Fitnesse.git</url>
+      </hudson.plugins.git.UserRemoteConfig>
+    </userRemoteConfigs>
+    <branches>
+      <hudson.plugins.git.BranchSpec>
+        <name>**</name>
+      </hudson.plugins.git.BranchSpec>
+    </branches>
+    <recursiveSubmodules>false</recursiveSubmodules>
+    <doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>
+    <authorOrCommitter>false</authorOrCommitter>
+    <clean>false</clean>
+    <wipeOutWorkspace>false</wipeOutWorkspace>
+    <pruneBranches>false</pruneBranches>
+    <buildChooser class="hudson.plugins.git.util.DefaultBuildChooser"/>
+    <gitTool>Default</gitTool>
+    <browser class="hudson.plugins.git.browser.GithubWeb">
+      <url>https://github.com/martinhbramwell/Tinkerpop_Fitnesse/</url>
+    </browser>
+    <submoduleCfg class="list"/>
+    <relativeTargetDir></relativeTargetDir>
+    <excludedRegions></excludedRegions>
+    <excludedUsers></excludedUsers>
+    <gitConfigName></gitConfigName>
+    <gitConfigEmail></gitConfigEmail>
+    <skipTag>false</skipTag>
+    <scmName></scmName>
+  </scm>
+  <quietPeriod>10</quietPeriod>
+  <scmCheckoutRetryCount>2</scmCheckoutRetryCount>
+  <canRoam>true</canRoam>
+  <disabled>false</disabled>
+  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+  <triggers class="vector">
+    <hudson.triggers.SCMTrigger>
+      <spec>25 06  * * * 
+25 14  * * * </spec>
+    </hudson.triggers.SCMTrigger>
+  </triggers>
+  <concurrentBuild>false</concurrentBuild>
+  <builders>
+    <hudson.tasks.Shell>
+      <command>cp -r ${WORKSPACE}/TinkerPop/* ${FITNESSE_ROOT}/TinkerPop</command>
+    </hudson.tasks.Shell>
+    <hudson.plugins.fitnesse.FitnesseBuilder>
+      <options>
+        <entry>
+          <string>fitnesseTargetPage</string>
+          <string>TinkerPop</string>
+        </entry>
+        <entry>
+          <string>fitnesseTargetIsSuite</string>
+          <string>true</string>
+        </entry>
+        <entry>
+          <string>fitnesseHost</string>
+          <string>www.mowa.justtrade.net</string>
+        </entry>
+        <entry>
+          <string>fitnesseHttpTimeout</string>
+          <string>60000</string>
+        </entry>
+        <entry>
+          <string>fitnessePortRemote</string>
+          <string>8088</string>
+        </entry>
+        <entry>
+          <string>fitnesseStart</string>
+          <string>False</string>
+        </entry>
+        <entry>
+          <string>fitnessePathToXmlResultsOut</string>
+          <string>resultsFile.xml</string>
+        </entry>
+      </options>
+    </hudson.plugins.fitnesse.FitnesseBuilder>
+  </builders>
+  <publishers>
+    <hudson.plugins.fitnesse.FitnesseResultsRecorder>
+      <fitnessePathToXmlResultsIn>resultsFile.xml</fitnessePathToXmlResultsIn>
+    </hudson.plugins.fitnesse.FitnesseResultsRecorder>
+  </publishers>
+  <buildWrappers/>
+</project>
