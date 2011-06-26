@@ -61,7 +61,8 @@ ${KILL_REXSTER_JOB_WORKSPACE}/WaitForRexsterToDie.sh
 </command>
     </hudson.tasks.Shell>
     <hudson.tasks.Maven>
-      <targets>-o clean
+      <targets>${0_MAVEN_OFFLINE_SWITCH}
+clean
 install
 -DskipTests</targets>
       <mavenName>Maven 2.2.1</mavenName>

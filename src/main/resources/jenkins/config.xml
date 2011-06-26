@@ -86,7 +86,9 @@
           <default>
             <comparator class="hudson.util.CaseInsensitiveComparator"/>
           </default>
-          <int>5</int>
+          <int>6</int>
+          <string>0_MAVEN_OFFLINE_SWITCH</string>
+          <string></string>
           <string>CONFIG_FILES_SCM_WORKSPACE</string>
           <string>../../ConfigFilesSCM/workspace</string>
           <string>FITNESSE_ROOT</string>

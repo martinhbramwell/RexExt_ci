@@ -70,7 +70,7 @@
 </command>
     </hudson.tasks.Shell>
     <hudson.tasks.Maven>
-      <targets>-o install</targets>
+      <targets>${0_MAVEN_OFFLINE_SWITCH} install</targets>
       <mavenName>Maven 2.2.1</mavenName>
       <pom>./sample-kibbles/pom.xml</pom>
       <usePrivateRepository>false</usePrivateRepository>
