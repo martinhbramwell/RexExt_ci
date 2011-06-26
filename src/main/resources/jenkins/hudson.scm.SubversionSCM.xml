@@ -4,5 +4,4 @@
   <credentials class="hashtable"/>
   <workspaceFormat>8</workspaceFormat>
   <validateRemoteUpToVar>false</validateRemoteUpToVar>
-  <storeAuthToDisk>false</storeAuthToDisk>
 </hudson.scm.SubversionSCM_-DescriptorImpl>
