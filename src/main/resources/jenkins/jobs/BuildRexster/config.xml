@@ -64,7 +64,7 @@ ${KILL_REXSTER_JOB_WORKSPACE}/WaitForRexsterToDie.sh
       <targets>-o clean
 install
 -DskipTests</targets>
-      <mavenName>(Default)</mavenName>
+      <mavenName>Maven 2.2.1</mavenName>
       <usePrivateRepository>false</usePrivateRepository>
     </hudson.tasks.Maven>
     <hudson.tasks.Shell>
