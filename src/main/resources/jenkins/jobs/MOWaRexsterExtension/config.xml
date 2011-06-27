@@ -37,9 +37,6 @@
     <pruneBranches>false</pruneBranches>
     <buildChooser class="hudson.plugins.git.util.DefaultBuildChooser"/>
     <gitTool>Default</gitTool>
-    <browser class="hudson.plugins.git.browser.GithubWeb">
-      <url>https://github.com/martinhbramwell/Monetary-Ontology-Walkabout.git/</url>
-    </browser>
     <submoduleCfg class="list"/>
     <relativeTargetDir></relativeTargetDir>
     <excludedRegions></excludedRegions>
@@ -64,11 +61,17 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Maven>
-      <targets>install</targets>
+      <targets>${0_MAVEN_OFFLINE_SWITCH} install package</targets>
       <mavenName>Maven 2.2.1</mavenName>
       <pom>rexster/extension/example/pom.xml</pom>
       <usePrivateRepository>false</usePrivateRepository>
     </hudson.tasks.Maven>
+    <hudson.tasks.Shell>
+      <command>cd rexster/extension/example
+
+ant dist
+</command>
+    </hudson.tasks.Shell>
   </builders>
   <publishers/>
   <buildWrappers/>

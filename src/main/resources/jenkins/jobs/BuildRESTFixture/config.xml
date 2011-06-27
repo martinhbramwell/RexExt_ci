@@ -64,7 +64,7 @@
   <builders>
     <hudson.tasks.Ant>
       <targets>clean  test  package  fitnesse-test dist</targets>
-      <antName>(Default)</antName>
+      <antName>Ant 1.8.2</antName>
     </hudson.tasks.Ant>
   </builders>
   <publishers/>
