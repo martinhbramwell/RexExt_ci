@@ -43,7 +43,10 @@ cp ${SAMPLE_KIBBLES_TARGETSPACE}/sample-kibbles-0.5-SNAPSHOT.jar ${REXSTER_HOME}
           <EscalateStatus>false</EscalateStatus>
           <RunIfJobSuccessful>false</RunIfJobSuccessful>
           <script>cd ${REXSTER_HOME}&#xd;
-echo ./rexster-start.sh  -configuration mowaRexster.xml | at NOW</script>
+ls -la .&#xd;
+echo &quot;./rexster-start.sh -configuration mowaRexster.xml&quot; | at NOW&#xd;
+&#xd;
+</script>
         </hudson.plugins.postbuildtask.TaskProperties>
       </tasks>
     </hudson.plugins.postbuildtask.PostbuildTask>

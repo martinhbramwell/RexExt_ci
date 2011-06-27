@@ -60,6 +60,11 @@
   </triggers>
   <concurrentBuild>false</concurrentBuild>
   <builders>
+    <hudson.tasks.Shell>
+      <command>cd ${REXSTER_HOME}
+
+( ./rexster-stop.sh  )&amp;</command>
+    </hudson.tasks.Shell>
     <hudson.tasks.Maven>
       <targets>${0_MAVEN_OFFLINE_SWITCH} install package</targets>
       <mavenName>Maven 2.2.1</mavenName>
@@ -67,12 +72,43 @@
       <usePrivateRepository>false</usePrivateRepository>
     </hudson.tasks.Maven>
     <hudson.tasks.Shell>
-      <command>cd rexster/extension/example
+      <command>REXSTER_LIB=&quot;${REXSTER_HOME}/lib&quot;
+REXSTER_VERSION=&quot;rexster-0.5-SNAPSHOT&quot;
+REXSTER_SERVER=&quot;${REXSTER_HOME}/target/${REXSTER_VERSION}-standalone/&quot;
+REXSTER_LIB=&quot;${REXSTER_SERVER}lib&quot;
+REXSTER_EXT=&quot;${REXSTER_SERVER}ext&quot;
+PROJ_ROOT=&quot;${WORKSPACE}/rexster/extension/example&quot;
+# ls -l ${REXSTER_LIB}
+# ls -l ${REXSTER_EXT}
+touch ${PROJ_ROOT}/src/main/resources/config/myRexster.xml
+cp -fp ${PROJ_ROOT}/src/main/resources/config/myRexster.xml ${REXSTER_HOME}
 
-ant dist
+cp -fp ${M2_REPO}/commons-fileupload/commons-fileupload/1.2/commons-fileupload-1.2.jar ${REXSTER_LIB}
+cp -fp ${M2_REPO}/com/hp/hpl/jena/jena/2.6.4/jena-2.6.4.jar ${REXSTER_LIB}
+cp -fp ${M2_REPO}/com/hp/hpl/jena/iri/0.8/iri-0.8.jar ${REXSTER_LIB}
+cp -fp ${M2_REPO}/com/ibm/icu/icu4j/3.4.4/icu4j-3.4.4.jar ${REXSTER_LIB}
+cp -fp ${M2_REPO}/xerces/xercesImpl/2.7.1/xercesImpl-2.7.1.jar ${REXSTER_LIB}
+cp -fp ${PROJ_ROOT}/target/mowa-study-0.1-SNAPSHOT.jar ${REXSTER_EXT}
+
+rm -fr ${REXSTER_HOME}/data/mowa-graph
+
+
+
 </command>
     </hudson.tasks.Shell>
+    <hudson.tasks.Shell>
+      <command>${KILL_REXSTER_JOB_WORKSPACE}/WaitForRexsterToDie.sh</command>
+    </hudson.tasks.Shell>
   </builders>
-  <publishers/>
+  <publishers>
+    <hudson.tasks.BuildTrigger>
+      <childProjects>StartRexster</childProjects>
+      <threshold>
+        <name>SUCCESS</name>
+        <ordinal>0</ordinal>
+        <color>BLUE</color>
+      </threshold>
+    </hudson.tasks.BuildTrigger>
+  </publishers>
   <buildWrappers/>
 </project>

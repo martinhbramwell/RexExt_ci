@@ -86,7 +86,7 @@
           <default>
             <comparator class="hudson.util.CaseInsensitiveComparator"/>
           </default>
-          <int>6</int>
+          <int>7</int>
           <string>0_MAVEN_OFFLINE_SWITCH</string>
           <string>-o</string>
           <string>CONFIG_FILES_SCM_WORKSPACE</string>
@@ -95,6 +95,8 @@
           <string>/etc/fitnesse/FitNesseRoot</string>
           <string>KILL_REXSTER_JOB_WORKSPACE</string>
           <string>../../KillRexster/workspace</string>
+          <string>M2_REPO</string>
+          <string>../../../.m2/repository</string>
           <string>REXSTER_HOME</string>
           <string>../../BuildRexster/workspace/</string>
           <string>SAMPLE_KIBBLES_TARGETSPACE</string>
