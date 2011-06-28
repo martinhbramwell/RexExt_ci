@@ -24,23 +24,19 @@ ps aux | grep fitnesse | grep -v grep | awk &apos;{print $2}&apos;&#xd;
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
   <triggers class="vector"/>
   <concurrentBuild>false</concurrentBuild>
-  <builders/>
-  <publishers>
-    <hudson.plugins.postbuildtask.PostbuildTask>
-      <tasks>
-        <hudson.plugins.postbuildtask.TaskProperties>
-          <logTexts>
-            <hudson.plugins.postbuildtask.LogProperties>
-              <logText></logText>
-              <operator>AND</operator>
-            </hudson.plugins.postbuildtask.LogProperties>
-          </logTexts>
-          <EscalateStatus>false</EscalateStatus>
-          <RunIfJobSuccessful>false</RunIfJobSuccessful>
-          <script>echo /etc/fitnesse/startup.sh | at NOW</script>
-        </hudson.plugins.postbuildtask.TaskProperties>
-      </tasks>
-    </hudson.plugins.postbuildtask.PostbuildTask>
-  </publishers>
+  <builders>
+    <hudson.tasks.Shell>
+      <command>(curl http://localhost:8088/?responder=shutdown) &amp;</command>
+    </hudson.tasks.Shell>
+    <hudson.tasks.Shell>
+      <command>echo Disable background job termination
+cp ../../BuildFitnesse/workspace/dist/fitnesse.jar .
+
+BUILD_ID=allow_to_run_as_daemon
+
+( java -jar fitnesse.jar  -p 8088 ) &amp;</command>
+    </hudson.tasks.Shell>
+  </builders>
+  <publishers/>
   <buildWrappers/>
 </project>

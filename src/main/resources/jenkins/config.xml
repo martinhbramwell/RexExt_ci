@@ -88,11 +88,11 @@
           </default>
           <int>7</int>
           <string>0_MAVEN_OFFLINE_SWITCH</string>
-          <string>-o</string>
+          <string></string>
           <string>CONFIG_FILES_SCM_WORKSPACE</string>
           <string>../../ConfigFilesSCM/workspace</string>
           <string>FITNESSE_ROOT</string>
-          <string>/etc/fitnesse/FitNesseRoot</string>
+          <string>../../StartFitnesse/workspace/FitNesseRoot</string>
           <string>KILL_REXSTER_JOB_WORKSPACE</string>
           <string>../../KillRexster/workspace</string>
           <string>M2_REPO</string>

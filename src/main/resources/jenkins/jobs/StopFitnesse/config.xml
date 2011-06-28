@@ -13,7 +13,7 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-      <command>curl http://mowa.justtrade.net:8088/?responder=shutdown</command>
+      <command>curl http://localhost:8088/?responder=shutdown</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers/>

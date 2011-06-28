@@ -1,17 +1,11 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <project>
   <actions/>
-  <description>This package keeps track of all the stuff used to configure the Fitnesse wiki for acceptance testing of Tinkerpop.</description>
-  <logRotator>
-    <daysToKeep>-1</daysToKeep>
-    <numToKeep>5</numToKeep>
-    <artifactDaysToKeep>-1</artifactDaysToKeep>
-    <artifactNumToKeep>-1</artifactNumToKeep>
-  </logRotator>
+  <description>This will rebuild Fitnesse whenever changes are published by the development team</description>
   <keepDependencies>false</keepDependencies>
   <properties>
     <com.coravy.hudson.plugins.github.GithubProjectProperty>
-      <projectUrl>https://github.com/martinhbramwell/Tinkerpop_Fitnesse/</projectUrl>
+      <projectUrl>https://github.com/unclebob/fitnesse.git/</projectUrl>
     </com.coravy.hudson.plugins.github.GithubProjectProperty>
   </properties>
   <scm class="hudson.plugins.git.GitSCM">
@@ -20,7 +14,7 @@
       <hudson.plugins.git.UserRemoteConfig>
         <name>origin</name>
         <refspec>+refs/heads/*:refs/remotes/origin/*</refspec>
-        <url>git://github.com/martinhbramwell/Tinkerpop_Fitnesse.git</url>
+        <url>git://github.com/unclebob/fitnesse.git</url>
       </hudson.plugins.git.UserRemoteConfig>
     </userRemoteConfigs>
     <branches>
@@ -36,9 +30,6 @@
     <pruneBranches>false</pruneBranches>
     <buildChooser class="hudson.plugins.git.util.DefaultBuildChooser"/>
     <gitTool>Default</gitTool>
-    <browser class="hudson.plugins.git.browser.GithubWeb">
-      <url>https://github.com/martinhbramwell/Tinkerpop_Fitnesse/</url>
-    </browser>
     <submoduleCfg class="list"/>
     <relativeTargetDir></relativeTargetDir>
     <excludedRegions></excludedRegions>
@@ -56,18 +47,15 @@
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
   <triggers class="vector">
     <hudson.triggers.SCMTrigger>
-      <spec>25 06  * * * 
-25 14  * * * </spec>
+      <spec>01 06 * * * 
+01 14 * * * </spec>
     </hudson.triggers.SCMTrigger>
   </triggers>
   <concurrentBuild>false</concurrentBuild>
   <builders>
-    <hudson.tasks.Shell>
-      <command>ls -l ${WORKSPACE}/*
-ls -l ${FITNESSE_ROOT}
-cp -fr ${WORKSPACE}/TinkerPop ${FITNESSE_ROOT}
-cp -fr ${WORKSPACE}/FrontPage ${FITNESSE_ROOT}</command>
-    </hudson.tasks.Shell>
+    <hudson.tasks.Ant>
+      <targets>clean release_jar</targets>
+    </hudson.tasks.Ant>
   </builders>
   <publishers/>
   <buildWrappers/>

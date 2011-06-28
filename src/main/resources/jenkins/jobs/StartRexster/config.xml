@@ -26,8 +26,7 @@ ps aux | grep rexster | grep -v grep | awk &apos;{print $2}&apos;&#xd;
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-      <command>cp ${CONFIG_FILES_SCM_WORKSPACE}/src/main/resources/jenkins/jobs/BuildRexster/workspace/mowaRexster.xml .
-cp ${SAMPLE_KIBBLES_TARGETSPACE}/sample-kibbles-0.5-SNAPSHOT.jar ${REXSTER_HOME}/target/rexster-0.5-SNAPSHOT-standalone/ext</command>
+      <command>${WORKSPACE}/../testLife.sh</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers>
@@ -36,17 +35,23 @@ cp ${SAMPLE_KIBBLES_TARGETSPACE}/sample-kibbles-0.5-SNAPSHOT.jar ${REXSTER_HOME}
         <hudson.plugins.postbuildtask.TaskProperties>
           <logTexts>
             <hudson.plugins.postbuildtask.LogProperties>
-              <logText></logText>
+              <logText>Rexster Down.</logText>
               <operator>AND</operator>
             </hudson.plugins.postbuildtask.LogProperties>
           </logTexts>
           <EscalateStatus>false</EscalateStatus>
-          <RunIfJobSuccessful>false</RunIfJobSuccessful>
-          <script>cd ${REXSTER_HOME}&#xd;
-ls -la .&#xd;
-echo &quot;./rexster-start.sh -configuration mowaRexster.xml&quot; | at NOW&#xd;
+          <RunIfJobSuccessful>true</RunIfJobSuccessful>
+          <script>cp ${CONFIG_FILES_SCM_WORKSPACE}/src/main/resources/jenkins/jobs/BuildRexster/workspace/mowaRexster.xml .&#xd;
+cp ${SAMPLE_KIBBLES_TARGETSPACE}/sample-kibbles-0.5-SNAPSHOT.jar ${REXSTER_HOME}/target/rexster-0.5-SNAPSHOT-standalone/ext&#xd;
 &#xd;
-</script>
+&#xd;
+cd ${REXSTER_HOME}&#xd;
+ls -la&#xd;
+&#xd;
+echo Disable background job termination&#xd;
+BUILD_ID=allow_to_run_as_daemon&#xd;
+&#xd;
+( ./rexster-start.sh -configuration mowaRexster.xml ) &amp;</script>
         </hudson.plugins.postbuildtask.TaskProperties>
       </tasks>
     </hudson.plugins.postbuildtask.PostbuildTask>
