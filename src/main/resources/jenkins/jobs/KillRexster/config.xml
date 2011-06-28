@@ -28,7 +28,9 @@
 </command>
     </hudson.tasks.Shell>
     <hudson.tasks.Shell>
-      <command>${WORKSPACE}/WaitForRexsterToDie.sh
+      <command>chmod +x ${WORKSPACE}/WaitForRexsterToDie.sh
+
+${WORKSPACE}/WaitForRexsterToDie.sh
 </command>
     </hudson.tasks.Shell>
   </builders>
