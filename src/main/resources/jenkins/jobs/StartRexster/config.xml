@@ -26,7 +26,9 @@ ps aux | grep rexster | grep -v grep | awk &apos;{print $2}&apos;&#xd;
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-      <command>${WORKSPACE}/../testLife.sh</command>
+      <command>chmod +x ${WORKSPACE}/testLife.sh
+${WORKSPACE}/testLife.sh
+</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers>
@@ -41,7 +43,7 @@ ps aux | grep rexster | grep -v grep | awk &apos;{print $2}&apos;&#xd;
           </logTexts>
           <EscalateStatus>false</EscalateStatus>
           <RunIfJobSuccessful>true</RunIfJobSuccessful>
-          <script>cp ${CONFIG_FILES_SCM_WORKSPACE}/src/main/resources/jenkins/jobs/BuildRexster/workspace/mowaRexster.xml .&#xd;
+          <script>cp ${CONFIG_FILES_SCM_WORKSPACE}/src/main/resources/jenkins/jobs/BuildRexster/workspace/mowaRexster.xml ${REXSTER_HOME}&#xd;
 cp ${SAMPLE_KIBBLES_TARGETSPACE}/sample-kibbles-0.5-SNAPSHOT.jar ${REXSTER_HOME}/target/rexster-0.5-SNAPSHOT-standalone/ext&#xd;
 &#xd;
 &#xd;
