@@ -53,6 +53,9 @@
   </triggers>
   <concurrentBuild>false</concurrentBuild>
   <builders>
+    <hudson.tasks.Shell>
+      <command>( curl http://localhost:8088/?responder=shutdown ) &amp;</command>
+    </hudson.tasks.Shell>
     <hudson.tasks.Ant>
       <antName>Ant 1.8.2</antName>
       <targets>clean release_jar</targets>

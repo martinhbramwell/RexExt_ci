@@ -63,8 +63,8 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-      <command>ls -l ${WORKSPACE}/*
-ls -l ${FITNESSE_ROOT}
+      <command># ls -l ${WORKSPACE}/*
+# ls -l ${FITNESSE_ROOT}
 cp -fr ${WORKSPACE}/TinkerPop ${FITNESSE_ROOT}
 cp -fr ${WORKSPACE}/FrontPage ${FITNESSE_ROOT}</command>
     </hudson.tasks.Shell>
