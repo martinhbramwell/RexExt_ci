@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<project>
+  <actions/>
+  <description></description>
+  <keepDependencies>false</keepDependencies>
+  <properties/>
+  <scm class="hudson.scm.NullSCM"/>
+  <canRoam>true</canRoam>
+  <disabled>false</disabled>
+  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+  <triggers class="vector"/>
+  <concurrentBuild>false</concurrentBuild>
+  <builders>
+    <hudson.plugins.fitnesse.FitnesseBuilder>
+      <options>
+        <entry>
+          <string>fitnesseTargetPage</string>
+          <string>TinkerPop.HasansKibbles</string>
+        </entry>
+        <entry>
+          <string>fitnesseTargetIsSuite</string>
+          <string>true</string>
+        </entry>
+        <entry>
+          <string>fitnesseHost</string>
+          <string>www.mowa.justtrade.net</string>
+        </entry>
+        <entry>
+          <string>fitnesseHttpTimeout</string>
+          <string></string>
+        </entry>
+        <entry>
+          <string>fitnessePortRemote</string>
+          <string>8088</string>
+        </entry>
+        <entry>
+          <string>fitnesseStart</string>
+          <string>False</string>
+        </entry>
+        <entry>
+          <string>fitnessePathToXmlResultsOut</string>
+          <string>MOWaExtensionFitnesse.xml</string>
+        </entry>
+      </options>
+    </hudson.plugins.fitnesse.FitnesseBuilder>
+  </builders>
+  <publishers>
+    <hudson.plugins.fitnesse.FitnesseResultsRecorder>
+      <fitnessePathToXmlResultsIn>MOWaExtensionFitnesse.xml</fitnessePathToXmlResultsIn>
+    </hudson.plugins.fitnesse.FitnesseResultsRecorder>
+  </publishers>
+  <buildWrappers/>
+</project>

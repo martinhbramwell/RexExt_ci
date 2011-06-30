@@ -102,7 +102,7 @@ rm -fr ${REXSTER_HOME}/data/mowa-graph
   </builders>
   <publishers>
     <hudson.tasks.BuildTrigger>
-      <childProjects>StartRexster</childProjects>
+      <childProjects>StartRexsterForMOWa</childProjects>
       <threshold>
         <name>SUCCESS</name>
         <ordinal>0</ordinal>

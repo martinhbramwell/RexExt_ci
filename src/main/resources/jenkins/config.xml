@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <hudson>
   <disabledAdministrativeMonitors/>
-  <version>1.417</version>
+  <version>1.418</version>
   <numExecutors>2</numExecutors>
   <mode>NORMAL</mode>
   <authorizationStrategy class="hudson.security.AuthorizationStrategy$Unsecured"/>
@@ -86,7 +86,7 @@
           <default>
             <comparator class="hudson.util.CaseInsensitiveComparator"/>
           </default>
-          <int>7</int>
+          <int>8</int>
           <string>0_MAVEN_OFFLINE_SWITCH</string>
           <string></string>
           <string>CONFIG_FILES_SCM_WORKSPACE</string>
@@ -101,6 +101,8 @@
           <string>../../BuildRexster/workspace/</string>
           <string>SAMPLE_KIBBLES_TARGETSPACE</string>
           <string>../../BuildKibbles/workspace/sample-kibbles/target/</string>
+          <string>START_REXSTER_WORKSPACE</string>
+          <string>../../StartRexster/workspace/</string>
         </tree-map>
       </envVars>
     </hudson.slaves.EnvironmentVariablesNodeProperty>

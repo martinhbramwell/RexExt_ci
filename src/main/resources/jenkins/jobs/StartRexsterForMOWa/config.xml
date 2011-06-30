@@ -2,7 +2,7 @@
 <project>
   <actions/>
   <description>This will start the Rexster server as a *NIX Daemon.&lt;br/&gt;&#xd;
-However, before starting it collects our customixed  run-time configuration files.&lt;br/&gt;&lt;br/&gt;&#xd;
+However, before starting it collects our customized  run-time configuration files.&lt;br/&gt;&lt;br/&gt;&#xd;
 &#xd;
 Check with :&lt;br/&gt;&#xd;
 ps aux | grep rexster | grep -v grep | awk &apos;{print $2}&apos;&#xd;
@@ -32,6 +32,14 @@ ${START_REXSTER_WORKSPACE}/testLife.sh
     </hudson.tasks.Shell>
   </builders>
   <publishers>
+    <hudson.tasks.BuildTrigger>
+      <childProjects>MOWaExtensionFitnesse</childProjects>
+      <threshold>
+        <name>SUCCESS</name>
+        <ordinal>0</ordinal>
+        <color>BLUE</color>
+      </threshold>
+    </hudson.tasks.BuildTrigger>
     <hudson.plugins.postbuildtask.PostbuildTask>
       <tasks>
         <hudson.plugins.postbuildtask.TaskProperties>
@@ -43,17 +51,13 @@ ${START_REXSTER_WORKSPACE}/testLife.sh
           </logTexts>
           <EscalateStatus>false</EscalateStatus>
           <RunIfJobSuccessful>true</RunIfJobSuccessful>
-          <script>cp ${CONFIG_FILES_SCM_WORKSPACE}/src/main/resources/jenkins/jobs/BuildRexster/workspace/mowaRexster.xml ${REXSTER_HOME}&#xd;
-cp ${SAMPLE_KIBBLES_TARGETSPACE}/sample-kibbles-0.5-SNAPSHOT.jar ${REXSTER_HOME}/target/rexster-0.5-SNAPSHOT-standalone/ext&#xd;
-&#xd;
-&#xd;
-cd ${REXSTER_HOME}&#xd;
+          <script>cd ${REXSTER_HOME}&#xd;
 ls -la&#xd;
 &#xd;
 echo Disable background job termination&#xd;
 BUILD_ID=allow_to_run_as_daemon&#xd;
 &#xd;
-( ./rexster-start.sh -configuration mowaRexster.xml ) &amp;</script>
+( ./rexster-start.sh -configuration myRexster.xml ) &amp;</script>
         </hudson.plugins.postbuildtask.TaskProperties>
       </tasks>
     </hudson.plugins.postbuildtask.PostbuildTask>
