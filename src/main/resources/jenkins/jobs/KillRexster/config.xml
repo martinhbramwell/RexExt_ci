@@ -21,7 +21,9 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-      <command>cd ${REXSTER_HOME}
+      <command>echo ${JAVA_HOME}
+
+cd ${REXSTER_HOME}
 
 (./rexster-stop.sh  )&amp;
 

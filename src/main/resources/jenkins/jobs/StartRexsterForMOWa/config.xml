@@ -52,6 +52,9 @@ ${START_REXSTER_WORKSPACE}/testLife.sh
           <EscalateStatus>false</EscalateStatus>
           <RunIfJobSuccessful>true</RunIfJobSuccessful>
           <script>cd ${REXSTER_HOME}&#xd;
+mkdir -p ./data/archive&#xd;
+mkdir -p ./data/tmp&#xd;
+&#xd;
 ls -la&#xd;
 &#xd;
 echo Disable background job termination&#xd;

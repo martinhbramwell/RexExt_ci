@@ -5,6 +5,7 @@
   <keepDependencies>false</keepDependencies>
   <properties/>
   <scm class="hudson.scm.NullSCM"/>
+  <quietPeriod>20</quietPeriod>
   <canRoam>true</canRoam>
   <disabled>false</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
@@ -28,7 +29,7 @@
         </entry>
         <entry>
           <string>fitnesseHttpTimeout</string>
-          <string></string>
+          <string>60000</string>
         </entry>
         <entry>
           <string>fitnessePortRemote</string>

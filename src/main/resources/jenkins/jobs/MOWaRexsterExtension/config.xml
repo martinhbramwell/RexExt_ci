@@ -80,8 +80,8 @@ REXSTER_EXT=&quot;${REXSTER_SERVER}ext&quot;
 PROJ_ROOT=&quot;${WORKSPACE}/rexster/extension/example&quot;
 # ls -l ${REXSTER_LIB}
 # ls -l ${REXSTER_EXT}
-touch ${PROJ_ROOT}/src/main/resources/config/myRexster.xml
-cp -fp ${PROJ_ROOT}/src/main/resources/config/myRexster.xml ${REXSTER_HOME}
+touch ${PROJ_ROOT}/src/main/resources/config/myRexster.xml.unx
+cp -fp ${PROJ_ROOT}/src/main/resources/config/myRexster.xml.unx ${REXSTER_HOME}/myRexster.xml
 
 cp -fp ${M2_REPO}/commons-fileupload/commons-fileupload/1.2/commons-fileupload-1.2.jar ${REXSTER_LIB}
 cp -fp ${M2_REPO}/com/hp/hpl/jena/jena/2.6.4/jena-2.6.4.jar ${REXSTER_LIB}
@@ -102,7 +102,7 @@ rm -fr ${REXSTER_HOME}/data/mowa-graph
   </builders>
   <publishers>
     <hudson.tasks.BuildTrigger>
-      <childProjects>StartRexsterForMOWa</childProjects>
+      <childProjects>StartRexsterForMOWa, Tinkerpop_Fitnesse, StartFitnesse</childProjects>
       <threshold>
         <name>SUCCESS</name>
         <ordinal>0</ordinal>

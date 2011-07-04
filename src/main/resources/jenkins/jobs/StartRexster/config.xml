@@ -26,8 +26,8 @@ ps aux | grep rexster | grep -v grep | awk &apos;{print $2}&apos;&#xd;
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-      <command>chmod +x ${START_REXSTER_WORKSPACE}/testLife.sh
-${START_REXSTER_WORKSPACE}/testLife.sh
+      <command>chmod +x ${WORKSPACE}/testLife.sh
+${WORKSPACE}/testLife.sh
 </command>
     </hudson.tasks.Shell>
   </builders>

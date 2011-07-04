@@ -65,8 +65,11 @@
     <hudson.tasks.Shell>
       <command># ls -l ${WORKSPACE}/*
 # ls -l ${FITNESSE_ROOT}
-cp -fr ${WORKSPACE}/TinkerPop ${FITNESSE_ROOT}
-cp -fr ${WORKSPACE}/FrontPage ${FITNESSE_ROOT}</command>
+cp -fr ${WORKSPACE}/TinkerPop/RexsterKibbles ${FITNESSE_ROOT}/TinkerPop
+cp -fr ${WORKSPACE}/TinkerPop/HasansKibbles ${FITNESSE_ROOT}/TinkerPop
+cp -fr ${WORKSPACE}/FrontPage ${FITNESSE_ROOT}
+
+</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers/>
