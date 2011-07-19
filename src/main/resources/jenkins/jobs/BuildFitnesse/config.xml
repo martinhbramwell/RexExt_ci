@@ -2,6 +2,12 @@
 <project>
   <actions/>
   <description>This will rebuild Fitnesse whenever changes are published by the development team</description>
+  <logRotator>
+    <daysToKeep>-1</daysToKeep>
+    <numToKeep>4</numToKeep>
+    <artifactDaysToKeep>-1</artifactDaysToKeep>
+    <artifactNumToKeep>-1</artifactNumToKeep>
+  </logRotator>
   <keepDependencies>false</keepDependencies>
   <properties>
     <com.coravy.hudson.plugins.github.GithubProjectProperty>
@@ -54,10 +60,12 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-      <command>( curl http://localhost:8088/?responder=shutdown ) &amp;</command>
+      <command>( curl http://localhost:8088/?responder=shutdown ) &amp;
+( curl http://localhost:9234/?responder=shutdown ) &amp;
+</command>
     </hudson.tasks.Shell>
     <hudson.tasks.Ant>
-      <targets>clean release_jar</targets>
+      <targets>clean jar</targets>
       <antName>Ant 1.8.2</antName>
     </hudson.tasks.Ant>
   </builders>

@@ -88,6 +88,12 @@ cp -fp ${M2_REPO}/com/hp/hpl/jena/jena/2.6.4/jena-2.6.4.jar ${REXSTER_LIB}
 cp -fp ${M2_REPO}/com/hp/hpl/jena/iri/0.8/iri-0.8.jar ${REXSTER_LIB}
 cp -fp ${M2_REPO}/com/ibm/icu/icu4j/3.4.4/icu4j-3.4.4.jar ${REXSTER_LIB}
 cp -fp ${M2_REPO}/xerces/xercesImpl/2.7.1/xercesImpl-2.7.1.jar ${REXSTER_LIB}
+cp -fp ${M2_REPO}/ch/qos/logback/logback-core/0.9.29/logback-core-0.9.29.jar ${REXSTER_LIB}
+cp -fp ${M2_REPO}/ch/qos/logback/logback-classic/0.9.29/logback-classic-0.9.29.jar ${REXSTER_LIB}
+
+rm -f ${REXSTER_LIB}/slf4*.*
+cp -fp ${M2_REPO}/org/slf4j/slf4j-api/1.6.1/slf4j-api-1.6.1.jar ${REXSTER_LIB}
+
 cp -fp ${PROJ_ROOT}/target/mowa-study-0.1-SNAPSHOT.jar ${REXSTER_EXT}
 
 rm -fr ${REXSTER_HOME}/data/mowa-graph
