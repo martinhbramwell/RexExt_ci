@@ -94,6 +94,9 @@ cp -fp ${M2_REPO}/ch/qos/logback/logback-classic/0.9.29/logback-classic-0.9.29.j
 rm -f ${REXSTER_LIB}/slf4*.*
 cp -fp ${M2_REPO}/org/slf4j/slf4j-api/1.6.1/slf4j-api-1.6.1.jar ${REXSTER_LIB}
 
+rm -f ${REXSTER_LIB}/groovy*.*
+cp -fp ${M2_REPO}/org/codehaus/groovy/groovy/1.8.0/groovy-1.8.0.jar ${REXSTER_LIB}
+
 cp -fp ${PROJ_ROOT}/target/mowa-study-0.1-SNAPSHOT.jar ${REXSTER_EXT}
 
 rm -fr ${REXSTER_HOME}/data/mowa-graph
