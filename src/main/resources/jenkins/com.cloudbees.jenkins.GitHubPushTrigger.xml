@@ -4,7 +4,7 @@
   <credentials>
     <com.cloudbees.jenkins.Credential>
       <username></username>
-      <password>rTiTR9KxugGSMWK56A4lDCSKBsBHal9kKNa12ONhD8jsJ9yQinj+Qst2VGtMbsOXpDGIR3Mhu1zvpNXYb/uvZYOY3eGL1EF1l4/zez9tQds=</password>
+      <password>H1Kws4lPPpZClggBkriW+LHKGxGoraTH/BF/v3M3MBLu2G3jcH8SMbRGWWF+lRoy/0c2RpI18ps8kJ5Mnd46+3tgyASdOSq1pNEykzEX4IgNl7D0eIPMRZq3X0p2wPR1mCEbpdX0ZRlleDWbbseWApZncYFqrn4P5zHnP6eRkaU=</password>
     </com.cloudbees.jenkins.Credential>
   </credentials>
 </com.cloudbees.jenkins.GitHubPushTrigger_-DescriptorImpl>

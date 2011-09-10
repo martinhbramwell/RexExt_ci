@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <project>
   <actions/>
-  <description>This will rebuild Rexster Kibbles whenever changes are published by the Tinkerpop development team</description>
+  <description>This will get the Sleep Mongoose REST interface for MongoDB</description>
   <logRotator>
     <daysToKeep>-1</daysToKeep>
     <numToKeep>4</numToKeep>
@@ -11,7 +11,7 @@
   <keepDependencies>false</keepDependencies>
   <properties>
     <com.coravy.hudson.plugins.github.GithubProjectProperty>
-      <projectUrl>https://github.com/tinkerpop/rexster/</projectUrl>
+      <projectUrl>https://github.com/kchodorow/sleepy.mongoose/</projectUrl>
     </com.coravy.hudson.plugins.github.GithubProjectProperty>
   </properties>
   <scm class="hudson.plugins.git.GitSCM">
@@ -20,12 +20,12 @@
       <hudson.plugins.git.UserRemoteConfig>
         <name>origin</name>
         <refspec>+refs/heads/*:refs/remotes/origin/*</refspec>
-        <url>git://github.com/tinkerpop/rexster-kibbles.git</url>
+        <url>git://github.com/kchodorow/sleepy.mongoose.git</url>
       </hudson.plugins.git.UserRemoteConfig>
     </userRemoteConfigs>
     <branches>
       <hudson.plugins.git.BranchSpec>
-        <name>**</name>
+        <name>*/master</name>
       </hudson.plugins.git.BranchSpec>
     </branches>
     <recursiveSubmodules>false</recursiveSubmodules>
@@ -36,6 +36,9 @@
     <pruneBranches>false</pruneBranches>
     <buildChooser class="hudson.plugins.git.util.DefaultBuildChooser"/>
     <gitTool>Default</gitTool>
+    <browser class="hudson.plugins.git.browser.GithubWeb">
+      <url>https://github.com/kchodorow/sleepy.mongoose/</url>
+    </browser>
     <submoduleCfg class="list"/>
     <relativeTargetDir></relativeTargetDir>
     <excludedRegions></excludedRegions>
@@ -51,46 +54,9 @@
   <disabled>false</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
-  <triggers class="vector">
-    <hudson.triggers.SCMTrigger>
-      <spec>31 06  * * * 
-31 14  * * * </spec>
-    </hudson.triggers.SCMTrigger>
-  </triggers>
+  <triggers class="vector"/>
   <concurrentBuild>false</concurrentBuild>
-  <builders>
-    <hudson.tasks.Shell>
-      <command>cd ${REXSTER_HOME}
-
-( ./rexster-stop.sh  )&amp;
-</command>
-    </hudson.tasks.Shell>
-    <hudson.tasks.Shell>
-      <command>grep -lre &apos;work-came-from&apos; ${WORKSPACE} | awk &apos;/.java/&apos; | xargs -d&apos;\n&apos; sed -i &apos;s/work-came-from/workCameFrom/g&apos;
-</command>
-    </hudson.tasks.Shell>
-    <hudson.tasks.Maven>
-      <targets>${0_MAVEN_OFFLINE_SWITCH} install</targets>
-      <mavenName>Maven 2.2.1</mavenName>
-      <pom>./sample-kibbles/pom.xml</pom>
-      <usePrivateRepository>false</usePrivateRepository>
-    </hudson.tasks.Maven>
-    <hudson.tasks.Shell>
-      <command>cp ./sample-kibbles/target/${KIBBLES_PACKAGE}.jar ${REXSTER_HOME}/target/${REXSTER_PACKAGE}/ext</command>
-    </hudson.tasks.Shell>
-    <hudson.tasks.Shell>
-      <command>${KILL_REXSTER_JOB_WORKSPACE}/WaitForRexsterToDie.sh</command>
-    </hudson.tasks.Shell>
-  </builders>
-  <publishers>
-    <hudson.tasks.BuildTrigger>
-      <childProjects>MOWaRexsterExtension</childProjects>
-      <threshold>
-        <name>SUCCESS</name>
-        <ordinal>0</ordinal>
-        <color>BLUE</color>
-      </threshold>
-    </hudson.tasks.BuildTrigger>
-  </publishers>
+  <builders/>
+  <publishers/>
   <buildWrappers/>
 </project>

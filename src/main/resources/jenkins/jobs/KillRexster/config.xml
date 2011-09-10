@@ -25,7 +25,7 @@
 
 cd ${REXSTER_HOME}
 
-(./rexster-stop.sh  )&amp;
+(./rexster.sh --stop )&amp;
 
 </command>
     </hudson.tasks.Shell>

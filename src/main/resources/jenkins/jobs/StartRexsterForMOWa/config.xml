@@ -60,7 +60,7 @@ ls -la&#xd;
 echo Disable background job termination&#xd;
 BUILD_ID=allow_to_run_as_daemon&#xd;
 &#xd;
-( ./rexster-start.sh -configuration myRexster.xml ) &amp;</script>
+( ./rexster.sh --start -c myRexster.xml ) &amp;</script>
         </hudson.plugins.postbuildtask.TaskProperties>
       </tasks>
     </hudson.plugins.postbuildtask.PostbuildTask>

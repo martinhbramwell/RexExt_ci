@@ -60,11 +60,10 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-      <command>chmod +x ./rexster-stop.sh
-( ${WORKSPACE}/rexster-stop.sh )&amp;
+      <command>chmod +x ./rexster.sh
+( ${WORKSPACE}/rexster.sh --stop)&amp;
 
-${KILL_REXSTER_JOB_WORKSPACE}/WaitForRexsterToDie.sh
-</command>
+${KILL_REXSTER_JOB_WORKSPACE}/WaitForRexsterToDie.sh</command>
     </hudson.tasks.Shell>
     <hudson.tasks.Maven>
       <targets>${0_MAVEN_OFFLINE_SWITCH}
@@ -74,11 +73,6 @@ install
       <mavenName>Maven 2.2.1</mavenName>
       <usePrivateRepository>false</usePrivateRepository>
     </hudson.tasks.Maven>
-    <hudson.tasks.Shell>
-      <command>cd ${WORKSPACE}
-chmod +x ./rexster-start.sh
-</command>
-    </hudson.tasks.Shell>
   </builders>
   <publishers>
     <hudson.tasks.BuildTrigger>

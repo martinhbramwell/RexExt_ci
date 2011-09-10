@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <hudson>
   <disabledAdministrativeMonitors/>
-  <version>1.418</version>
+  <version>1.421</version>
   <numExecutors>2</numExecutors>
   <mode>NORMAL</mode>
   <authorizationStrategy class="hudson.security.AuthorizationStrategy$Unsecured"/>
@@ -88,19 +88,25 @@
           <default>
             <comparator class="hudson.util.CaseInsensitiveComparator"/>
           </default>
-          <int>8</int>
+          <int>11</int>
           <string>0_MAVEN_OFFLINE_SWITCH</string>
-          <string></string>
+          <string>-o</string>
           <string>CONFIG_FILES_SCM_WORKSPACE</string>
           <string>../../ConfigFilesSCM/workspace</string>
           <string>FITNESSE_ROOT</string>
           <string>../../StartFitnesse/workspace/FitNesseRoot</string>
+          <string>KIBBLES_PACKAGE</string>
+          <string>sample-kibbles-0.6-SNAPSHOT</string>
           <string>KILL_REXSTER_JOB_WORKSPACE</string>
           <string>../../KillRexster/workspace</string>
           <string>M2_REPO</string>
           <string>../../../.m2/repository</string>
           <string>REXSTER_HOME</string>
           <string>../../BuildRexster/workspace/</string>
+          <string>REXSTER_PACKAGE</string>
+          <string>rexster-${REXSTER_VERSION}-standalone</string>
+          <string>REXSTER_VERSION</string>
+          <string>0.6-SNAPSHOT</string>
           <string>SAMPLE_KIBBLES_TARGETSPACE</string>
           <string>../../BuildKibbles/workspace/sample-kibbles/target/</string>
           <string>START_REXSTER_WORKSPACE</string>

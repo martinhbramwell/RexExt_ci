@@ -14,7 +14,7 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-      <command>#  Give Fitnesse a kick
+      <command>#  Give Rexster a kick
 curl  http://www.mowa.justtrade.net:8182/neo4jsample/mowa/stevens?req=mowa.stevens</command>
     </hudson.tasks.Shell>
     <hudson.plugins.fitnesse.FitnesseBuilder>

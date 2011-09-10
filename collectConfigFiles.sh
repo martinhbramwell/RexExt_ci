@@ -24,12 +24,6 @@ do
 done
 
 
-SOURCE=$BASE_DIR/BuildRexster/workspace/mowaRexster.xml
-DESTINATION=${FILEDESTINATION}BuildRexster/workspace/
-echo "Copying ${SOURCE} to ${DESTINATION}"
- mkdir -p ${DESTINATION} 
- cp -fr ${SOURCE} ${DESTINATION}
-
 SOURCE=$BASE_DIR/KillRexster/workspace/WaitForRexsterToDie.sh 
 DESTINATION=${FILEDESTINATION}KillRexster/workspace/
 echo "Copying ${SOURCE} to ${DESTINATION}"

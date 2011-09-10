@@ -63,7 +63,7 @@
     <hudson.tasks.Shell>
       <command>cd ${REXSTER_HOME}
 
-( ./rexster-stop.sh  )&amp;</command>
+( ./rexster.sh --stop )&amp;</command>
     </hudson.tasks.Shell>
     <hudson.tasks.Maven>
       <targets>${0_MAVEN_OFFLINE_SWITCH} install package</targets>
@@ -73,8 +73,7 @@
     </hudson.tasks.Maven>
     <hudson.tasks.Shell>
       <command>REXSTER_LIB=&quot;${REXSTER_HOME}/lib&quot;
-REXSTER_VERSION=&quot;rexster-0.5-SNAPSHOT&quot;
-REXSTER_SERVER=&quot;${REXSTER_HOME}/target/${REXSTER_VERSION}-standalone/&quot;
+REXSTER_SERVER=&quot;${REXSTER_HOME}/target/${REXSTER_PACKAGE}/&quot;
 REXSTER_LIB=&quot;${REXSTER_SERVER}lib&quot;
 REXSTER_EXT=&quot;${REXSTER_SERVER}ext&quot;
 PROJ_ROOT=&quot;${WORKSPACE}/rexster/extension/example&quot;
