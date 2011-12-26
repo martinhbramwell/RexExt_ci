@@ -1,0 +1,535 @@
+h1. Examples
+
+In this section you will find a few examples of REST API usage.
+
+# A Windows batch file of "curl" commands, that creates vertices and indices, but does not try to create edges (because of the need to reuse tuple IDs from previous API calls)
+# A groovy script that repeats much of what the Windows batch file does, but creates a complete database of vertices, indices *and* edges.
+# Some very simple suggested Gremlin commands, printed out by the Groovy script, that you can use to test your reults 
+
+h2. Windows batch file
+
+h3. Pre-requisites
+
+* You'll need Rexster of course, started up as described "here":https://github.com/tinkerpop/rexster/wiki/Command-Line
+* You'll need to be sure your rexster.xml file enables Neo4j as described "here":https://github.com/tinkerpop/rexster/wiki/Rexster-Configuration
+* You'll need to install curl.  You get it from "http://curl.haxx.se/download.html":http://curl.haxx.se/download.html.  De-compress the zip to disk, add it to your Windows "path" environment variable and it should run with no difficulty.
+* You'll need to install Groovy.  The script uses one Groovy operation <code>groovy -e "println(groovy.json.JsonOutput.prettyPrint(System.in.text))"</code> for the purpose of displaying the HTTP Response data in an easily readable fashion.  You get it from "Codehaus":http://groovy.codehaus.org/Download and install it using their "guide":http://groovy.codehaus.org/Getting+Started+Guide.
+* You'll need to edit your hosts file C:\WINDOWS\system32\drivers\etc\hosts and add a line for the imaginary server "aHost" used in the scripts below.  The IP address must be the same as the server IP address where you installed Rexster.
+
+h3. Script
+
+The script can be found "here":https://github.com/martinhbramwell/Rexster-Stuff/blob/master/Rexster-REST-API-Example_1.bat
+Typing Rexster-REST-API-Example_1.bat on the windows command line should be sufficient to get the same results as show in the next section below. 
+
+h3. Successful Result
+
+When you run the script, you should get results as follows.  You will find the script in the next section.
+
+bc. -----------------------------------------
+.     ----[ Evacuate database ]----
+-----------------------------------------
+curl -sSX DELETE "http://aHost:8182/neo4jsample"
+{
+    "version": "0.4-SNAPSHOT",
+    "queryTime": 262.494255
+}
+
+bc. -----------------------------------------
+. ----[ Recreate index vertices ]----
+-----------------------------------------
+curl -gsX POST "http://aHost:8182/neo4jsample/indices/vertices?class=vertex&type=automatic&keys=[ID]"
+{
+    "version": "0.4-SNAPSHOT",
+    "queryTime": 13.161729,
+    "results": {
+        "name": "vertices",
+        "class": "com.tinkerpop.blueprints.pgm.Vertex",
+        "type": "automatic"
+    }
+}
+
+bc. -----------------------------------------
+.      ----[ List indices ]----
+-----------------------------------------
+curl -sX GET "http://aHost:8182/neo4jsample/indices"
+{
+    "version": "0.4-SNAPSHOT",
+    "results": [
+        {
+            "name": "vertices",
+            "class": "com.tinkerpop.blueprints.pgm.Vertex",
+            "type": "automatic"
+        }
+    ],
+    "totalSize": 1,
+    "queryTime": 0.245282
+}
+
+bc. -----------------------------------------
+.      ----[ Create deck ]----
+-----------------------------------------
+curl -sd "ID=5&Type=Pack&Name=Deck of Cards" "http://aHost:8182/neo4jsample/vertices/"
+{
+    "version": "0.4-SNAPSHOT",
+    "results": {
+        "_id": 137,
+        "_type": "vertex",
+        "Name": "Deck of Cards",
+        "Type": "Pack",
+        "ID": "5"
+    },
+    "queryTime": 21.224205
+}
+
+bc. .
+-
+--
+---
+.      ----[ Create suits ]----
+-----------------------------------------
+curl -sd "ID=101&Type=Suit&Name=Diamond" "http://aHost:8182/neo4jsample/vertices/"
+{
+    "version": "0.4-SNAPSHOT",
+    "results": {
+        "_id": 138,
+        "_type": "vertex",
+        "Name": "Diamond",
+        "Type": "Suit",
+        "ID": "101"
+    },
+    "queryTime": 14.430605
+}
+
+bc. curl -sd "ID=202&Type=Suit&Name=Heart" "http://aHost:8182/neo4jsample/vertices/"
+{
+    "version": "0.4-SNAPSHOT",
+    "results": {
+        "_id": 139,
+        "_type": "vertex",
+        "Name": "Heart",
+        "Type": "Suit",
+        "ID": "202"
+    },
+    "queryTime": 12.442643
+}
+
+bc. curl -sd "ID=303&Type=Suit&Name=Spade" "http://aHost:8182/neo4jsample/vertices/"
+{
+    "version": "0.4-SNAPSHOT",
+    "results": {
+        "_id": 140,
+        "_type": "vertex",
+        "Name": "Spade",
+        "Type": "Suit",
+        "ID": "303"
+    },
+    "queryTime": 15.684675
+}
+
+bc. curl -sd "ID=404&Type=Suit&Name=Club" "http://aHost:8182/neo4jsample/vertices/"
+{
+    "version": "0.4-SNAPSHOT",
+    "results": {
+        "_id": 141,
+        "_type": "vertex",
+        "Name": "Club",
+        "Type": "Suit",
+        "ID": "404"
+    },
+    "queryTime": 31.377172
+}
+
+bc. -----------------------------------------
+---
+--
+-
+.
+.
+-
+--
+---
+.       ----[ Create aces ]----
+-----------------------------------------
+curl -sd "ID=1&Type=Card&Name=Ace" "http://aHost:8182/neo4jsample/vertices/"
+{
+    "version": "0.4-SNAPSHOT",
+    "results": {
+        "_id": 142,
+        "_type": "vertex",
+        "Name": "Ace",
+        "Type": "Card",
+        "ID": "1"
+    },
+    "queryTime": 11.767697
+}
+
+bc. curl -sd "ID=14&Type=Card&Name=Ace" "http://aHost:8182/neo4jsample/vertices/"
+{
+    "version": "0.4-SNAPSHOT",
+    "results": {
+        "_id": 143,
+        "_type": "vertex",
+        "Name": "Ace",
+        "Type": "Card",
+        "ID": "14"
+    },
+    "queryTime": 11.770491
+}
+
+bc. curl -sd "ID=27&Type=Card&Name=Ace" "http://aHost:8182/neo4jsample/vertices/"
+{
+    "version": "0.4-SNAPSHOT",
+    "results": {
+        "_id": 144,
+        "_type": "vertex",
+        "Name": "Ace",
+        "Type": "Card",
+        "ID": "27"
+    },
+    "queryTime": 11.557055
+}
+
+bc. curl -sd "ID=40&Type=Card&Name=Ace" "http://aHost:8182/neo4jsample/vertices/"
+{
+    "version": "0.4-SNAPSHOT",
+    "results": {
+        "_id": 145,
+        "_type": "vertex",
+        "Name": "Ace",
+        "Type": "Card",
+        "ID": "40"
+    },
+    "queryTime": 13.48272
+}
+
+bc. -----------------------------------------
+---
+--
+-
+.
+.
+-
+--
+---
+.      ----[ Create kings ]----
+-----------------------------------------
+curl -sd "ID=13&Type=Card&Name=King" "http://aHost:8182/neo4jsample/vertices/"
+{
+    "version": "0.4-SNAPSHOT",
+    "results": {
+        "_id": 146,
+        "_type": "vertex",
+        "Name": "King",
+        "Type": "Card",
+        "ID": "13"
+    },
+    "queryTime": 12.428674
+}
+
+bc. curl -sd "ID=26&Type=Card&Name=King" "http://aHost:8182/neo4jsample/vertices/"
+{
+    "version": "0.4-SNAPSHOT",
+    "results": {
+        "_id": 147,
+        "_type": "vertex",
+        "Name": "King",
+        "Type": "Card",
+        "ID": "26"
+    },
+    "queryTime": 20.65905
+}
+
+bc. curl -sd "ID=39&Type=Card&Name=King" "http://aHost:8182/neo4jsample/vertices/"
+{
+    "version": "0.4-SNAPSHOT",
+    "results": {
+        "_id": 148,
+        "_type": "vertex",
+        "Name": "King",
+        "Type": "Card",
+        "ID": "39"
+    },
+    "queryTime": 20.145577
+}
+
+bc. curl -sd "ID=52&Type=Card&Name=King" "http://aHost:8182/neo4jsample/vertices/"
+{
+    "version": "0.4-SNAPSHOT",
+    "results": {
+        "_id": 149,
+        "_type": "vertex",
+        "Name": "King",
+        "Type": "Card",
+        "ID": "52"
+    },
+    "queryTime": 18.390605
+}
+
+bc. -----------------------------------------
+---
+--
+-
+.
+-----------------------------------------
+.   ----[ Check an Ace vertex ]----
+-----------------------------------------
+curl -sX GET "http://aHost:8182/neo4jsample/indices/vertices?key=ID&value=40"
+{
+    "version": "0.4-SNAPSHOT",
+    "results": [
+        {
+            "_id": 145,
+            "_type": "vertex",
+            "Name": "Ace",
+            "Type": "Card",
+            "ID": "40"
+        }
+    ],
+    "totalSize": 1,
+    "queryTime": 6.529881
+}
+
+bc. -----------------------------------------
+.   ----[ Check a King vertex ]----
+-----------------------------------------
+curl -sX GET "http://aHost:8182/neo4jsample/indices/vertices?key=ID&value=52"
+{
+    "version": "0.4-SNAPSHOT",
+    "results": [
+        {
+            "_id": 149,
+            "_type": "vertex",
+            "Name": "King",
+            "Type": "Card",
+            "ID": "52"
+        }
+    ],
+    "totalSize": 1,
+    "queryTime": 3.876749
+}
+
+bc. -----------------------------------------
+* * * *  Some Notes on the Above  * * * *
+-----------------------------------------
+*
+* This script creates vertices and indices, but
+* does not try to create edges (because of the
+* need to reuse tuple IDs from previous API calls).
+*
+* Most of the HTTP Response printouts above have a
+* field {"results": {"_id": x, ...}.  Creating
+* edges requires capturing two returned _id fields
+* from created vertices and POSTing them as the
+* _outV and _inV fields of an edge creation command,
+* a task only a Microsoft zionist would want to
+* attempt with MS-DOS batch commands.
+*
+* Instead please see the second example that uses a
+* Groovy script to do all of the above and more (and,
+* it is platform-independant, of course).
+*
+-----------------------------------------
+*
+* Created by Martin "Hasan" Bramwell as a miniscule
+* contribution to the wonderful Tinkerpop tool set:
+* http://www.tinkerpop.com/
+*
+* You should find a link to the latest version of
+* this script somewhere on this page here:
+* https://github.com/tinkerpop/rexster/wiki/Basic-REST-API
+*
+-----------------------------------------
+* EOF
+
+h2. Groovy script
+
+h3. Pre-requisites
+
+This script has the same pre-requisites as the Windows batch file above.
+
+h3. Script
+
+The script can be found "here":https://github.com/martinhbramwell/Rexster-Stuff/blob/master/Rexster-REST-API-Example_2.groovy
+
+Typing Rexster-REST-API-Example_2.groovy on the windows command line should be sufficient to get the same results as show in the next section below. 
+
+
+h3. Successful Result
+
+When you run the script, you should get results like this:
+
+<pre>
+<code>
+-----------------------------------------
+       ----[ Test connection ]----
+-----------------------------------------
+Got request status 200 from http://aHost:8182/neo4jsample/
+-----------------------------------------
+      ----[ Evacuate database ]----
+-----------------------------------------
+Response : [version:0.4-SNAPSHOT, queryTime:261.80115]
+-----------------------------------------
+----[ Recreate the index "vertices" ]----
+-----------------------------------------
+Response : [name:vertices, type:automatic]
+-----------------------------------------
+        ----[ List indices ]----
+-----------------------------------------
+Response : [[name:vertices, type:automatic]]
+-----------------------------------------
+        ----[ Create suits ]----
+-----------------------------------------
+Response : [_id:460, _type:vertex, Name:Spades, UCFrag:160, UCBlack:├ó┬Ö┬á, Type:Suit, ID:100, UCWhite:├ó┬Ö┬ñ]
+Response : [_id:461, _type:vertex, Name:Hearts, UCFrag:176, UCBlack:├ó┬Ö┬Ñ, Type:Suit, ID:200, UCWhite:├ó┬Ö┬í]
+Response : [_id:462, _type:vertex, Name:Diamonds, UCFrag:192, UCBlack:├ó┬Ö┬ª, Type:Suit, ID:300, UCWhite:├ó┬Ö┬ó]
+Response : [_id:463, _type:vertex, Name:Clubs, UCFrag:208, UCBlack:├ó┬Ö┬ú, Type:Suit, ID:400, UCWhite:├ó┬Ö┬º]
+-----------------------------------------
+  ----[ Create 56 card deck ]----
+-----------------------------------------
+Response : [_id:464, _type:vertex, Name:Minor Arcana Tarot, UCFrag:126976, Type:Deck, Id:1]
+-----------------------------------------
+  ----[ Create 52 card deck ]----
+-----------------------------------------
+Response : [_id:465, _type:vertex, Name:Western, UCFrag:126976, Type:Deck, Id:2]
+-----------------------------------------
+        ----[ Create cards ]----
+-----------------------------------------
+The Ace of Spades has value :
+ -- 1 in the Major Arcana Tarot deck and
+ -- 1 in the Western deck.
+The Two of Spades has value :
+ -- 2 in the Major Arcana Tarot deck and
+ -- 2 in the Western deck.
+The Three of Spades has value :
+ -- 3 in the Major Arcana Tarot deck and
+ -- 3 in the Western deck.
+The Four of Spades has value :
+ -- 4 in the Major Arcana Tarot deck and
+ -- 4 in the Western deck.
+The Five of Spades has value :
+ -- 5 in the Major Arcana Tarot deck and
+ -- 5 in the Western deck.
+The Six of Spades has value :
+ -- 6 in the Major Arcana Tarot deck and
+ -- 6 in the Western deck.
+The Seven of Spades has value :
+ -- 7 in the Major Arcana Tarot deck and
+ -- 7 in the Western deck.
+The Eight of Spades has value :
+ -- 8 in the Major Arcana Tarot deck and
+ -- 8 in the Western deck.
+The Nine of Spades has value :
+ -- 9 in the Major Arcana Tarot deck and
+ -- 9 in the Western deck.
+             :
+             :
+             :
+             :
+             :
+             :
+The Ten of Clubs has value :
+ -- 10 in the Major Arcana Tarot deck and
+ -- 10 in the Western deck.
+The Jack of Clubs has value :
+ -- 11 in the Major Arcana Tarot deck and
+ -- 11 in the Western deck.
+The Knight of Clubs has value :
+ -- 12 in the Major Arcana Tarot deck and
+The Queen of Clubs has value :
+ -- 13 in the Major Arcana Tarot deck and
+ -- 12 in the Western deck.
+The King of Clubs has value :
+ -- 14 in the Major Arcana Tarot deck and
+ -- 13 in the Western deck.
+-----------------------------------------
+        ----[ Finished ]----
+-----------------------------------------
+-----------------------------------------
+Now, running the following eight commands on Gremlin
+should obtain the results indicated below:
+
+- - - - - - -
+
+g.V{it.Name=="Western"}
+western = g.v(253)  //  Be sure to use the same ID as returned by the preceding command.
+western.Type
+cardNames = []
+cardValues = []
+western.inE{it.label=="ofDeck"}.outV.outE{it.label=="ofSuit"}.inV{it.Name=="Hearts"}.back(4).Name >> cardNames
+western.inE{it.label=="ofDeck"}.outV.outE{it.label=="ofSuit"}.inV{it.Name=="Hearts"}.back(6).Val >> cardValues
+itrCards = cardNames.iterator();ii = 0;while(itrCards.hasNext()){println "The " + itrCards.next() + " of Spades has value " + cardValues.get(ii++) }
+
+- - - - - - -
+
+/*
+ *
+Gremlin 1.1-SNAPSHOT
+         \,,,/
+         (o o)
+-----oOOo-(_)-oOOo-----
+gremlin>  g.V{it.Name=="Western"}
+==>v[ 253]
+
+gremlin>  western = g.v(253)
+==>v[ 253]
+
+gremlin>  cardNames = []
+==>
+
+gremlin>  cardValues = []
+==>
+
+gremlin>  western.inE{it.label=="ofDeck"}.outV.outE{it.label=="ofSuit"}.inV{it.Name=="Hearts"}.back(4).Name >> cardNames
+==>King
+==>Queen
+==>Jack
+==>Ten
+==>Nine
+==>Eight
+==>Seven
+==>Six
+==>Five
+==>Four
+==>Three
+==>Two
+==>Ace
+
+gremlin>  western.inE{it.label=="ofDeck"}.outV.outE{it.label=="ofSuit"}.inV{it.Name=="Hearts"}.back(6).Val >> cardValues
+==>13
+==>12
+==>11
+==>10
+==>9
+==>8
+==>7
+==>6
+==>5
+==>4
+==>3
+==>2
+==>1
+
+gremlin>  itrCards = cardNames.iterator();ii = 0;while(itrCards.hasNext()){println "The " + itrCards.next() + " of Spades has value " + cardValues.get(ii++) }
+==>The King of Spades has value 13
+==>The Queen of Spades has value 12
+==>The Jack of Spades has value 11
+==>The Ten of Spades has value 10
+==>The Nine of Spades has value 9
+==>The Eight of Spades has value 8
+==>The Seven of Spades has value 7
+==>The Six of Spades has value 6
+==>The Five of Spades has value 5
+==>The Four of Spades has value 4
+==>The Three of Spades has value 3
+==>The Two of Spades has value 2
+==>The Ace of Spades has value 1
+gremlin>
+*
+*/
+  
+</code>
+</pre>
+
+
+
+bc. // ---------------------------------- o 0 o ---------------------------------------
